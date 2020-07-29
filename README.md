@@ -1,5 +1,5 @@
 # FazamFlix
-App construído na semanda de Imersão React da Alura
+Desenvolvimento de um React App em TypeScript durante a semana de Imersão React Alura.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
