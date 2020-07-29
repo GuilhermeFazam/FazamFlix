@@ -9,7 +9,7 @@ import VideoCard from '../VideoCard';
 
 interface CarouselProps {
     ignoreFirstVideo?: boolean;
-    category: CategoryProps;
+    category: any;
 }
 
 interface CategoryProps {
@@ -19,7 +19,7 @@ interface CategoryProps {
         url: string;
         text: string;
     };
-    videos: never[];
+    videos: any[];
 }
 
 const Carousel: React.FC<CarouselProps> = ({ ignoreFirstVideo, category }) => {
