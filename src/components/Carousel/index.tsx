@@ -45,9 +45,9 @@ const Carousel: React.FC<CarouselProps> = ({ ignoreFirstVideo, category }) => {
                 <SlickSlider
                     {...{
                         dots: false,
-                        infinite: false,
+                        infinite: true,
                         speed: 300,
-                        centerMode: false,
+                        centerMode: true,
                         variableWidth: true,
                         adaptiveHeight: true,
                     }}
