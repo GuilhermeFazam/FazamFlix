@@ -19,7 +19,7 @@ interface CategoryProps {
         url: string;
         text: string;
     };
-    videos: any[];
+    videos: never[];
 }
 
 const Carousel: React.FC<CarouselProps> = ({ ignoreFirstVideo, category }) => {
