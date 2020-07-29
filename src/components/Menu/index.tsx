@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Container, Nav } from './styles';
+import { Link } from 'react-router-dom';
 
-import ButtonLink from '../ButtonLink';
+import { Container, Nav } from './styles';
 
 import Logo from '../../assets/image/logo.png';
 
@@ -10,12 +10,12 @@ const Menu: React.FC = () => {
     return (
         <Container>
             <Nav>
-                <a href="/">
+                <Link to="/">
                     <img src={Logo} alt="FazamFlix" />
-                </a>
-                <ButtonLink className="ButtonLink" href="/">
+                </Link>
+                <Link className="ButtonLink" to="/cadastro/video">
                     Novo Video
-                </ButtonLink>
+                </Link>
             </Nav>
         </Container>
     );

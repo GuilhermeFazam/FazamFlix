@@ -7,7 +7,7 @@ export default createGlobalStyle`
     }
 
     :root {
-        --primary: #2A7AE4;
+        --primary: #B81D24;
         --black: #000000;
         --blackLighter: #9E9E9E;
         --grayLight: #F5F5F5;
@@ -22,10 +22,23 @@ export default createGlobalStyle`
         margin: 0;
         padding: 0;
     }
+
     body {
         --bodyPaddingTop: 94px;
         padding-top: var(--bodyPaddingTop);
+        background: #221f1f;
     }
+
+    #root{
+        min-height: calc(100vh - var(--bodyPaddingTop));
+        display:flex;
+        flex-direction: column;
+    }
+
+    main{
+        flex: 1;
+    }
+    
     a {
         color: inherit;
     } 

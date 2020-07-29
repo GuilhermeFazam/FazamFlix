@@ -1,11 +1,14 @@
 import React from 'react';
+import SlickSlider from 'react-slick';
 import {
+    Container,
     VideoCardGroupContainer,
-    VideoCardList,
     Title,
     ExtraLink,
+    SliderItem,
 } from './styles';
 import VideoCard from '../VideoCard';
+// import Slider from '../Slider';
 
 interface CarouselProps {
     ignoreFirstVideo?: boolean;
@@ -38,25 +41,39 @@ const Carousel: React.FC<CarouselProps> = ({ ignoreFirstVideo, category }) => {
                     )}
                 </>
             )}
-            <VideoCardList>
-                {videos.map(
-                    (video: { titulo: string; url: string }, index: number) => {
-                        if (ignoreFirstVideo && index === 0) {
-                            return null;
-                        }
+            <Container>
+                <SlickSlider
+                    {...{
+                        dots: false,
+                        infinite: false,
+                        speed: 300,
+                        centerMode: false,
+                        variableWidth: true,
+                        adaptiveHeight: true,
+                    }}
+                >
+                    {videos.map(
+                        (
+                            video: { titulo: string; url: string },
+                            index: number,
+                        ) => {
+                            if (ignoreFirstVideo && index === 0) {
+                                return null;
+                            }
 
-                        return (
-                            <li key={video.titulo}>
-                                <VideoCard
-                                    videoTitle={video.titulo}
-                                    videoURL={video.url}
-                                    categoryColor={cor}
-                                />
-                            </li>
-                        );
-                    },
-                )}
-            </VideoCardList>
+                            return (
+                                <SliderItem key={video.titulo}>
+                                    <VideoCard
+                                        videoTitle={video.titulo}
+                                        videoURL={video.url}
+                                        categoryColor={cor}
+                                    />
+                                </SliderItem>
+                            );
+                        },
+                    )}
+                </SlickSlider>
+            </Container>
         </VideoCardGroupContainer>
     );
 };
