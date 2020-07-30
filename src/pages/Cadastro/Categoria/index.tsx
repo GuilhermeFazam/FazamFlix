@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Form } from './styles';
 
-import Button from '../../../components/Button';
+import api from '../../../services/api';
 
-import { Input, TextArea } from '../../../components/Input';
+import Button from '../../../components/Form/Button';
+
+import { Input, TextArea } from '../../../components/Form/Field';
 
 const Caterory: React.FC = () => {
     const categoryInitalValue = {
-        name: 'Categoria Inicial',
+        id: '',
+        titulo: 'teste',
         description: '',
         color: '#000',
     };
@@ -40,19 +43,35 @@ const Caterory: React.FC = () => {
         e.preventDefault();
         setCategory([...category, categoryDataForm]);
     }
+
+    useEffect(() => {
+        async function loadCategorys(): Promise<void> {
+            const response = await api.get('/categorias');
+            setCategory(response.data);
+        }
+
+        loadCategorys();
+    }, []);
+
+    // useEffect(() => {
+    //     fetch('http://localhost:3030/categorias/').then(async res => {
+    //         const response = await res.json();
+    //         setCategory([...response]);
+    //     });
+    // }, []);
     return (
         <Container>
             <h1>
                 Nova Categoria:
-                <span>{categoryDataForm.name}</span>
+                <span>{categoryDataForm.titulo}</span>
             </h1>
 
             <Form>
                 <form onSubmit={e => handleSubmit(e)}>
                     <Input
                         label="Titulo: "
-                        name="name"
-                        value={categoryDataForm.name}
+                        name="titulo"
+                        value={categoryDataForm.titulo}
                         type="text"
                         onChange={handleCategory}
                     />
@@ -74,9 +93,9 @@ const Caterory: React.FC = () => {
                 </form>
             </Form>
             <ul>
-                {category.map((categoria, index) => {
-                    const id = categoria.name + index;
-                    return <li key={id}>{categoria.name}</li>;
+                {category.map(categoria => {
+                    const { id } = categoria;
+                    return <li key={id}>{categoria.titulo}</li>;
                 })}
             </ul>
 

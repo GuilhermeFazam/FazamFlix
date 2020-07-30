@@ -24,13 +24,13 @@ export const Input: React.FC<InputProps> = ({
     return (
         <Container>
             <label htmlFor={name}>
-                {label}
                 <input
                     name={name}
                     value={value}
                     onChange={onChange}
                     type={type}
                 />
+                <span>{label}</span>
             </label>
         </Container>
     );
@@ -44,8 +44,8 @@ export const TextArea: React.FC<TextAreaProps> = ({
     return (
         <Container>
             <label htmlFor={name}>
-                {label}
                 <textarea name={name} onChange={onChange} />
+                <span>{label}</span>
             </label>
         </Container>
     );
