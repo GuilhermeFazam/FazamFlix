@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes } from 'react';
 
-// import { Container } from './styles';
+import { Container } from './styles';
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string;
     value?: string;
@@ -21,8 +22,8 @@ export const Input: React.FC<InputProps> = ({
     label,
 }) => {
     return (
-        <div>
-            <label>
+        <Container>
+            <label htmlFor={name}>
                 {label}
                 <input
                     name={name}
@@ -31,7 +32,7 @@ export const Input: React.FC<InputProps> = ({
                     type={type}
                 />
             </label>
-        </div>
+        </Container>
     );
 };
 
@@ -41,11 +42,11 @@ export const TextArea: React.FC<TextAreaProps> = ({
     label,
 }) => {
     return (
-        <div>
-            <label>
+        <Container>
+            <label htmlFor={name}>
                 {label}
                 <textarea name={name} onChange={onChange} />
             </label>
-        </div>
+        </Container>
     );
 };

@@ -39,8 +39,6 @@ const Caterory: React.FC = () => {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
         e.preventDefault();
         setCategory([...category, categoryDataForm]);
-
-        console.log(category);
     }
     return (
         <Container>
