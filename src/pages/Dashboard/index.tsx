@@ -1,30 +1,55 @@
-import React from 'react';
-import dadosIniciais from '../../data/data.json';
+import React, { useState, useEffect } from 'react';
+import api from '../../services/api';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
 
-const App: React.FC = () => {
-    const data = dadosIniciais.categorias;
+interface CategoryProps {
+    id: number;
+    titulo: string;
+    cor: string;
+    link_extra?: LinkExtra;
+    videos: Videos[];
+}
+interface LinkExtra {
+    text: string;
+    url: string;
+}
+
+interface Videos {
+    titulo: string;
+    url: string;
+    decripition: string;
+}
+
+const App: React.FC<CategoryProps> = () => {
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        async function loadData(): Promise<void> {
+            const response = await api.get('/categorias?_embed=videos');
+            setData(response.data);
+        }
+        loadData();
+    }, []);
 
     return (
         <>
             <div className="App">
-                <BannerMain
-                    videoTitle={data[0].videos[0].titulo}
-                    url={data[0].videos[0].url}
-                    videoDescription="O que é Front-end? Trabalhando na área os termos HTML, CSS e JavaScript fazem parte da rotina das desenvolvedoras e desenvolvedores. Mas o que eles fazem, afinal? Descubra com a Vanessa!"
-                />
-                {data.map((item, index) => {
+                {data.map((item: CategoryProps, index: number) => {
                     if (index === 0) {
                         return (
-                            <Carousel
-                                key={item.titulo}
-                                ignoreFirstVideo
-                                category={item}
-                            />
+                            <div key={item.id}>
+                                <BannerMain
+                                    videoTitle={item.videos[0].titulo}
+                                    url={item.videos[0].url}
+                                    videoDescription={
+                                        item.videos[0].decripition
+                                    }
+                                />
+                                <Carousel ignoreFirstVideo category={item} />
+                            </div>
                         );
                     }
-                    return <Carousel key={item.titulo} category={item} />;
+                    return <Carousel key={item.id} category={item} />;
                 })}
             </div>
         </>
